@@ -1,0 +1,186 @@
+<div class="auth-container">
+  <div class="auth-brand">
+    <div class="brand-logo">
+      <svg class="logo-placeholder" viewBox="0 0 24 24">
+        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+        <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+      </svg>
+    </div>
+
+    <h1 class="brand-title">ThoughtsApp</h1>
+
+    <p class="brand-description">
+      Listen to people's thoughts all around the world!
+    </p>
+
+    <ul class="brand-features">
+      <li>Record voice message</li>
+      <li>After uploading listen to random voice messages</li>
+      <li>Fully anonymously</li>
+    </ul>
+  </div>
+  <div class="card-glow"></div>
+
+  <div class="auth-card">
+    <div class="mobile-logo">
+      <div class="brand-logo">
+        <svg class="logo-placeholder" viewBox="0 0 24 24">
+          <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+          <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+        </svg>
+      </div>
+      <h1 class="brand-title">ThoughtsApp</h1>
+    </div>
+
+    <div class="mode-toggle" *ngIf="!resetMode">
+      <div class="toggle-indicator" [ngClass]="{'register': !isLogin}"></div>
+      <button type="button"
+              class="toggle-btn"
+              [ngClass]="{'active': isLogin}"
+              (click)="switchMode()"
+              [disabled]="isSubmitting">
+        Login
+      </button>
+      <button type="button"
+              class="toggle-btn"
+              [ngClass]="{'active': !isLogin}"
+              (click)="switchMode()"
+              [disabled]="isSubmitting">
+        Register
+      </button>
+    </div>
+
+    <div class="auth-header" *ngIf="!resetMode">
+      <h2 class="auth-title" [ngClass]="{'register': !isLogin}">
+        {{ isLogin ? 'Login' : 'Register' }}
+      </h2>
+      <p class="auth-subtitle">
+        {{ isLogin ? 'Access your account' : 'Create a new account' }}
+      </p>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <form [formGroup]="resetMode ? resetForm : authForm"
+          (ngSubmit)="resetMode ? onResetPassword() : onSubmit()"
+          class="auth-form">
+
+      <div *ngIf="resetMode">
+        <div class="input-group">
+          <div class="input-wrapper">
+            <input type="email"
+                   formControlName="email"
+                   placeholder="Enter your email"
+                   class="auth-input"
+                   [class.error]="isResetFieldInvalid('email')">
+          </div>
+          <div class="error-message" *ngIf="isResetFieldInvalid('email')">
+            {{ getResetFieldError('email') }}
+          </div>
+        </div>
+
+        <button type="submit" class="auth-submit" [disabled]="isResetting">
+          {{ isResetting ? 'Sending...' : 'Send Reset Email' }}
+        </button>
+
+        <p class="back-to-login">
+          <a href="#" (click)="resetMode = false; isSubmitting = false">Back to Login</a>
+        </p>
+      </div>
+
+      <ng-container *ngIf="!resetMode">
+        <!-- Username -->
+        <div class="input-group">
+          <div class="input-wrapper">
+            <input type="text"
+                   id="username"
+                   formControlName="username"
+                   class="auth-input"
+                   [class.error]="isFieldInvalid('username')"
+                   placeholder=" ">
+            <label for="username" class="input-label">Username</label>
+          </div>
+          <div class="error-message" *ngIf="isFieldInvalid('username')">
+            {{ getFieldError('username') }}
+          </div>
+        </div>
+
+        <div class="input-group" *ngIf="!isLogin">
+          <div class="input-wrapper">
+            <input type="email"
+                   id="email"
+                   formControlName="email"
+                   class="auth-input"
+                   [class.error]="isFieldInvalid('email')"
+                   placeholder=" ">
+            <label for="email" class="input-label">Email</label>
+          </div>
+          <div class="error-message" *ngIf="isFieldInvalid('email')">
+            {{ getFieldError('email') }}
+          </div>
+        </div>
+
+        <div class="input-group">
+          <div class="input-wrapper">
+            <input [type]="showPassword ? 'text' : 'password'"
+                   id="password"
+                   formControlName="password"
+                   class="auth-input"
+                   [class.error]="isFieldInvalid('password')"
+                   placeholder=" ">
+            <label for="password" class="input-label">Password</label>
+            <button type="button"
+                    class="password-toggle"
+                    (click)="togglePasswordVisibility()">
+              {{ showPassword ? 'Hide' : 'Show' }}
+            </button>
+          </div>
+          <div class="error-message" *ngIf="isFieldInvalid('password')">
+            {{ getFieldError('password') }}
+          </div>
+        </div>
+
+        <div class="input-group" *ngIf="!isLogin">
+          <div class="input-wrapper">
+            <input [type]="showConfirmPassword ? 'text' : 'password'"
+                   id="confirmPassword"
+                   formControlName="confirmPassword"
+                   class="auth-input"
+                   [class.error]="isFieldInvalid('confirmPassword')"
+                   placeholder=" ">
+            <label for="confirmPassword" class="input-label">Confirm Password</label>
+            <button type="button"
+                    class="password-toggle"
+                    (click)="toggleConfirmPasswordVisibility()">
+              {{ showConfirmPassword ? 'Hide' : 'Show' }}
+            </button>
+          </div>
+          <div class="error-message" *ngIf="isFieldInvalid('confirmPassword')">
+            {{ getFieldError('confirmPassword') }}
+          </div>
+        </div>
+
+        <button type="submit"
+                class="auth-submit"
+                [class.loading]="isSubmitting"
+                [disabled]="isSubmitting">
+          <span class="submit-text" *ngIf="!isSubmitting">
+            {{ isLogin ? 'Login' : 'Register' }}
+          </span>
+          <div class="loading-spinner" *ngIf="isSubmitting">
+            <div class="spinner-ring"></div>
+            <span>{{ isLogin ? 'Logging in...' : 'Registering...' }}</span>
+          </div>
+        </button>
+
+        <div class="auth-footer" *ngIf="isLogin">
+          <a href="#" (click)="resetMode = true; isSubmitting = false">Forgot Password?</a>
+        </div>
+      </ng-container>
+    </form>
+
+    <div class="card-scan-line" [class.active]="isSubmitting"></div>
+  </div>
+</div>

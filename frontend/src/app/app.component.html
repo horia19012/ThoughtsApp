@@ -1,0 +1,54 @@
+
+<div class="dark-background">
+  <!-- Neural Network Grid -->
+  <div class="neural-grid"></div>
+
+  <div class="particle-system">
+    <div class="particle" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]"></div>
+  </div>
+
+  <div class="wave-ripple ripple-1"></div>
+  <div class="wave-ripple ripple-2"></div>
+  <div class="wave-ripple ripple-3"></div>
+  <div class="wave-ripple ripple-4"></div>
+  <div class="wave-ripple ripple-5"></div>
+
+
+  <div class="main-visualizer">
+    <div class="frequency-bar" *ngFor="let bar of visualizerBars; let i = index"
+         [style.animation-delay]="(i * 0.08) + 's'"></div>
+  </div>
+
+  <div class="side-visualizer left-viz">
+    <div class="mini-bar" *ngFor="let bar of [1,2,3,4,5,6,7,8,9,10]; let i = index"
+         [style.animation-delay]="(i * 0.12) + 's'"></div>
+  </div>
+
+  <div class="side-visualizer right-viz">
+    <div class="mini-bar" *ngFor="let bar of [1,2,3,4,5,6,7,8,9,10]; let i = index"
+         [style.animation-delay]="(i * 0.15) + 's'"></div>
+  </div>
+
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+  <div class="glow-orb orb-4"></div>
+
+
+  <div class="scan-line horizontal-scan"></div>
+  <div class="scan-line vertical-scan"></div>
+
+
+  <div class="geo-shape triangle-1"></div>
+  <div class="geo-shape triangle-2"></div>
+  <div class="geo-shape hexagon-1"></div>
+  <div class="geo-shape hexagon-2"></div>
+
+  <div class="energy-stream stream-1"></div>
+  <div class="energy-stream stream-2"></div>
+  <div class="energy-stream stream-3"></div>
+</div>
+
+<div class="main-content">
+  <router-outlet></router-outlet>
+</div>

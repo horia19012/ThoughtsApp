@@ -1,0 +1,87 @@
+<div class="voice-message-page">
+  <div class="voice-message-wrapper">
+    <div class="auth-brand">
+      <div class="brand-logo">
+        <svg class="logo-placeholder" viewBox="0 0 24 24">
+          <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+          <path
+            d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+        </svg>
+      </div>
+
+      <h1 class="brand-title">ThoughtsApp</h1>
+
+      <p class="brand-description">
+        Listen to people's thoughts all around the world!
+      </p>
+
+      <ul class="brand-features">
+        <li>Record voice message</li>
+        <li>After uploading listen to random voice messages</li>
+        <li>Fully anonymously</li>
+      </ul>
+    </div>
+    <div class="voice-message-container" *ngIf="isSupported; else notSupported">
+      <!-- Record -->
+      <button
+        class="mic-button"
+        *ngIf="!hasUploadedThisHour"
+        [class.recording]="isRecording"
+        (click)="toggleRecording()"
+        [title]="isRecording ? 'Stop Recording' : 'Start Recording'">
+        🎤
+      </button>
+
+      <!-- Play / Pause -->
+      <button
+        class="play-button"
+        (click)="togglePlayback()"
+        [title]="isPlaying ? 'Pause' : 'Play'">
+        {{ isPlaying ? '⏸' : '▶' }}
+      </button>
+
+      <!-- Waveform -->
+      <div class="waveform-line-container">
+        <canvas #waveformCanvas (click)="seekAudio($event)"></canvas>
+      </div>
+
+      <!-- Time -->
+      <div class="time-display">
+        <span *ngIf="isRecording">{{ formatTime(recordingTime) }}</span>
+        <span *ngIf="!isRecording && isRecorded">{{ formatTime(currentTime) }}</span>
+      </div>
+
+      <!-- Actions -->
+      <div class="action-buttons">
+        <button class="delete-button"
+                *ngIf="!hasUploadedThisHour"
+                (click)="deleteRecording()"
+                [disabled]="!isRecorded"
+                title="Delete">🗑
+        </button>
+        <button class="send-button"
+                *ngIf="!hasUploadedThisHour"
+                (click)="sendMessage()"
+                [disabled]="!isRecorded"
+                title="Send">
+        </button>
+      </div>
+
+      <!-- Hidden audio -->
+      <audio #audioPlayer hidden></audio>
+
+      <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+      <div class="next-button-container">
+        <button class="next-button" [disabled]="!hasUploadedThisHour" (click)="nextUserAudio()">
+          Next ⏭
+        </button>
+      </div>
+    </div>
+
+
+
+    <ng-template #notSupported>
+      <p class="error-message">Voice recording not supported in this browser.</p>
+    </ng-template>
+  </div>
+</div>

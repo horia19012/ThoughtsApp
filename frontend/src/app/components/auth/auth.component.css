@@ -1,0 +1,530 @@
+/* Add this at the top for global text color reset */
+* {
+  box-sizing: border-box;
+}
+
+.auth-container,
+.auth-container * {
+  color: inherit;
+}
+
+/* Authentication Container */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: #ffffff;
+}
+
+/* Main Wrapper */
+.auth-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Left Side - Logo and Description */
+.auth-brand {
+  flex: 1;
+  max-width: 500px;
+  padding-right: 40px;
+}
+
+.brand-logo {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 32px;
+  background: linear-gradient(135deg, #00ffff, #ff0080, #8000ff);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 40px rgba(0, 255, 255, 0.3),
+    0 0 80px rgba(255, 0, 128, 0.2),
+    inset 0 0 40px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: logoGlow 4s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 40px rgba(0, 255, 255, 0.3),
+      0 0 80px rgba(255, 0, 128, 0.2),
+      inset 0 0 40px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 60px rgba(0, 255, 255, 0.5),
+      0 0 120px rgba(255, 0, 128, 0.3),
+      inset 0 0 60px rgba(255, 255, 255, 0.2);
+  }
+}
+
+.logo-placeholder {
+  width: 60px;
+  height: 60px;
+  fill: rgba(255, 255, 255, 0.9);
+}
+
+.brand-title {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #00ffff, #ff0080, #8000ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+}
+
+.brand-description {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.brand-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.brand-features li {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 12px;
+  padding-left: 24px;
+  position: relative;
+}
+
+.brand-features li:before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff;
+}
+
+/* Main Card */
+.auth-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  animation: cardFloat 6s ease-in-out infinite;
+}
+
+@keyframes cardFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Remove card glow effect */
+.card-glow {
+  display: none;
+}
+
+/* Mode Toggle */
+.mode-toggle {
+  position: relative;
+  display: flex;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.toggle-indicator {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(255, 0, 128, 0.3));
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+  box-shadow:
+    0 0 20px rgba(0, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.toggle-indicator.register {
+  transform: translateX(100%);
+  background: linear-gradient(135deg, rgba(255, 0, 128, 0.3), rgba(128, 0, 255, 0.3));
+  box-shadow:
+    0 0 20px rgba(255, 0, 128, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 14px 20px;
+  background: transparent !important;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7) !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.toggle-btn.active {
+  color: rgba(255, 255, 255, 1) !important;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.toggle-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Auth Header */
+.auth-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.auth-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.auth-subtitle {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+/* Form */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Input Groups */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+/* Input Styling */
+/* Input Styling */
+.auth-input {
+  width: 100%;
+  padding: 18px 16px;
+  border: 1.5px solid rgba(255, 255, 255, 0.2); /* thinner, no double borders */
+  border-radius: 12px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.05); /* semi-transparent */
+  backdrop-filter: blur(10px);
+  color: #ffffff;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+/* Floating Labels - match input bg */
+.input-label {
+  position: absolute;
+  left: 16px;
+  top: 18px;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+  transition: all 0.3s ease;
+
+  /* Match input's background */
+
+
+  padding: 0 6px;
+  border-radius: 6px;
+}
+
+/* When input is focused or filled */
+.auth-input:focus + .input-label,
+.auth-input:not(:placeholder-shown) + .input-label {
+  top: -22px;       /* moves above box */
+  left: 12px;
+  font-size: 13px;
+  color: #00ffff;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+
+  /* keep transparent background */
+  backdrop-filter: blur(10px);
+}
+
+
+/* Password Toggle */
+.password-toggle {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.password-toggle:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+
+/* Error Messages */
+.error-message {
+  font-size: 14px;
+  color: #ff6b6b;
+  margin-top: 4px;
+  text-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+}
+
+/* Submit Button */
+.auth-submit {
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(135deg, #00ffff, #ff0080);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+  box-shadow:
+    0 4px 20px rgba(0, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.auth-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 30px rgba(0, 255, 255, 0.4),
+    0 0 40px rgba(255, 0, 128, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.auth-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+/* Loading State */
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.spinner-ring {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Footer Links */
+.auth-footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.auth-footer a,
+.back-to-login a {
+  color: #00ffff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.auth-footer a:hover,
+.back-to-login a:hover {
+  color: #ff0080;
+  text-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
+  text-decoration: none;
+}
+
+.back-to-login {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Remove card scan line effect */
+.card-scan-line {
+  display: none;
+}
+
+/* Focus and accessibility improvements */
+.toggle-btn:focus-visible,
+.auth-input:focus-visible,
+.password-toggle:focus-visible,
+.auth-submit:focus-visible,
+.auth-footer a:focus-visible,
+.back-to-login a:focus-visible {
+  outline: 2px solid #00ffff;
+  outline-offset: 2px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .auth-wrapper {
+    flex-direction: column;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .auth-brand {
+    max-width: 100%;
+    padding-right: 0;
+  }
+
+  .brand-title {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-container {
+    padding: 20px;
+  }
+
+  .auth-card {
+    padding: 32px 24px;
+  }
+
+  .brand-title {
+    font-size: 32px;
+  }
+
+  .brand-description {
+    font-size: 18px;
+  }
+
+  .brand-logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .logo-placeholder {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-wrapper {
+    gap: 30px;
+  }
+
+  .auth-card {
+    padding: 24px 20px;
+  }
+
+  .auth-title {
+    font-size: 28px;
+  }
+
+  .brand-title {
+    font-size: 28px;
+  }
+
+  .brand-description {
+    font-size: 16px;
+  }
+
+  .auth-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+
+.auth-brand {
+  display: block;
+}
+.mobile-logo {
+  display: none;
+}
+
+/* Mobile: show logo inside card instead */
+@media (max-width: 768px) {
+  .auth-brand {
+    display: none;
+  }
+  .mobile-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .mobile-logo .brand-logo {
+    width: 60px;
+    height: 60px;
+  }
+  .mobile-logo .brand-title {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+  }
+}

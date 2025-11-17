@@ -1,0 +1,276 @@
+/* Page Container */
+.voice-message-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: #ffffff;
+}
+
+/* Two-column wrapper */
+.voice-message-wrapper {
+  display: flex;
+  gap: 60px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: flex-start; /* keep left column aligned */
+}
+
+/* Left: Logo + Text */
+.auth-brand {
+  flex: 1;
+  max-width: 400px;
+}
+
+.auth-brand .brand-logo {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #00ffff, #ff0080, #8000ff);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 40px rgba(0, 255, 255, 0.3),
+    0 0 80px rgba(255, 0, 128, 0.2),
+    inset 0 0 40px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: logoGlow 4s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 40px rgba(0, 255, 255, 0.3),
+      0 0 80px rgba(255, 0, 128, 0.2),
+      inset 0 0 40px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 60px rgba(0, 255, 255, 0.5),
+      0 0 120px rgba(255, 0, 128, 0.3),
+      inset 0 0 60px rgba(255, 255, 255, 0.2);
+  }
+}
+
+.auth-brand .brand-title {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #00ffff, #ff0080, #8000ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.auth-brand .brand-description {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.brand-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.brand-features li {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 12px;
+  padding-left: 24px;
+  position: relative;
+}
+
+.brand-features li:before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff;
+}
+
+/* Right: Voice Message Container */
+.voice-message-container {
+  flex: 1;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 25px 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* Buttons with spacing and shine */
+.voice-message-container button {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* spacing between icon and text */
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 14px 24px; /* bigger padding */
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  margin: 12px 0; /* spacing between buttons */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shining gradient overlay */
+.voice-message-container button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(120deg, rgba(0,255,255,0.3), rgba(255,0,128,0.3), rgba(128,0,255,0.3), rgba(0,255,255,0.3));
+  background-size: 200% 200%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+  transform: rotate(25deg);
+  border-radius: 12px;
+  animation: shineMove 3s linear infinite;
+}
+
+/* Show overlay on hover */
+.voice-message-container button:hover::before {
+  opacity: 1;
+}
+
+/* Gradient movement */
+@keyframes shineMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Keep text above overlay */
+.voice-message-container button span,
+.voice-message-container button::after {
+  position: relative;
+  z-index: 1;
+}
+
+/* Button colors */
+.mic-button.recording { background: #ff4d4d; box-shadow: 0 0 15px #ff4d4d; }
+.play-button { background: rgba(0, 255, 170, 0.15); }
+.send-button { background: #00ffaa; font-weight: bold; }
+.delete-button { background: #ff4d4d; }
+.next-button { background: #00aaff; font-weight: bold; }
+
+/* Hover pulse + shine */
+.voice-message-container button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow:
+    0 0 20px rgba(0, 255, 255, 0.5),
+    0 0 40px rgba(255, 0, 128, 0.3),
+    inset 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Waveform */
+.waveform-line-container {
+  width: 100%;
+  height: 100px;
+  margin: 20px 0;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.waveform-line-container.playing {
+  box-shadow: 0 0 15px #00ffaa;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.time-display {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  gap: 12px; /* spacing between buttons */
+}
+
+.error-message {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Add text next to icons */
+.mic-button::after { content: ' Record'; font-size: 0.9rem; }
+.play-button::after { content: ' Play/Pause'; font-size: 0.9rem; }
+.send-button::after { content: ' Send'; font-size: 0.9rem; }
+.delete-button::after { content: ' Delete'; font-size: 0.9rem; }
+.next-button::after { content: ''; }
+
+/* Responsive: stack columns on mobile */
+@media (max-width: 1024px) {
+  .voice-message-wrapper {
+    flex-direction: column;
+    gap: 40px;
+    text-align: center;
+    align-items: center; /* center everything */
+  }
+
+  .auth-brand {
+    max-width: 100%;
+    padding-right: 0;
+  }
+
+  .voice-message-container {
+    max-width: 100%;      /* fill the screen width */
+    width: 100%;          /* ensure full width */
+    padding: 20px;        /* optional: reduce padding for mobile */
+    box-sizing: border-box; /* prevent overflow */
+  }
+
+  /* Make record and play buttons smaller on mobile */
+  .mic-button,
+  .play-button {
+    width: 200px;
+    height: 36px;
+    font-size: 18px; /* optional: adjust icon size */
+  }
+
+  .next-button {
+    width: 95%;
+    max-width: 500px;
+    padding: 16px 32px;
+    font-size: 18px;
+  }
+
+  .action-buttons button {
+    width: 100px;
+    height: 50px;
+    font-size: 14px;
+  }
+}
